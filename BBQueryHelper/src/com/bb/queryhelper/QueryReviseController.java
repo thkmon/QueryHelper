@@ -20,6 +20,8 @@ public class QueryReviseController {
 		String prepareString = "";
 		String parameterString = "";
 		
+		boolean firstLine = false;
+		
 		int originLineCount = originArr.length;
 		for (int i=0; i<originLineCount; i++) {
 			String str = originArr[i];
@@ -30,6 +32,11 @@ public class QueryReviseController {
 			boolean bPreparing = false;
 			boolean bParameters = false;
 			
+			if (!firstLine) {
+				firstLine = true;
+				bPreparing = true;
+			}
+			
 			int idxPreparing = str.indexOf("Preparing:");
 			if (idxPreparing > -1) {
 				str = str.substring(idxPreparing + "Preparing:".length());
@@ -39,6 +46,11 @@ public class QueryReviseController {
 				int idxParameters = str.indexOf("Parameters:");
 				if (idxParameters > -1) {
 					str = str.substring(idxParameters + "Parameters:".length());
+					bParameters = true;
+				}
+				
+				if (str.startsWith("[") && str.endsWith("]")) {
+					str = str.substring(1, str.length() - 1);
 					bParameters = true;
 				}
 			}

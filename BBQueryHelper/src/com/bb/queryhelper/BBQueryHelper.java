@@ -21,6 +21,7 @@ public class BBQueryHelper {
 		
 		inputTextArea = new BBTextArea();
 		inputTextArea.setFont(new Font("Courier New", Font.PLAIN, 15));
+		
 		form.addScrollPane(inputTextArea, 10, 10, 760, 240);
 		
 		outputTextArea = new BBTextArea();
