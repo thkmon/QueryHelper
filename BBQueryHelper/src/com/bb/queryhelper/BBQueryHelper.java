@@ -1,10 +1,13 @@
 package com.bb.queryhelper;
 
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -44,36 +47,46 @@ public class BBQueryHelper {
 		});
 	}
 
-	public BBTextArea inputTextArea = null;
-//	public BBTextArea inputTextArea2 = null;
-	public BBTextArea outputTextArea = null;
+	public static JScrollPane inputPane = null;
+	public static JScrollPane outputPane = null;
+	public static BBTextArea inputTextArea = null;
+//	public static BBTextArea inputTextArea2 = null;
+	public static BBTextArea outputTextArea = null;
+	public static JButton button = null;
+	public static JButton button2 = null;
 	
 	public void showForm() {
 		int top = 10;
 		
-		BasicForm form = new BasicForm(800, 610, "BBQueryHelper_" + CConst.version);
+		final BasicForm form = new BasicForm(740, 780, "BBQueryHelper_" + CConst.version);
+		
+		form.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent evt) {
+				resizeForm(form.getWidth(), form.getHeight());
+	        }
+		});
 		
 		inputTextArea = new BBTextArea();
-		inputTextArea.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		inputTextArea.setFont(new Font("Malgun Gothic", Font.PLAIN, 15));
 		
-		form.addScrollPane(inputTextArea, 10, 10, 760, 240);
+		inputPane = form.addScrollPane(inputTextArea, 10, 10, 760, 240);
 		
 //		top = top + 250;
 //		
 //		inputTextArea2 = new BBTextArea();
-//		inputTextArea2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+//		inputTextArea2.setFont(new Font("Malgun Gothic", Font.PLAIN, 15));
 //		
 //		form.addScrollPane(inputTextArea2, 10, 260, 760, 240);
 		
 		top = top + 250;
 		
 		outputTextArea = new BBTextArea();
-		outputTextArea.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		form.addScrollPane(outputTextArea, 10, top, 760, 240);
+		outputTextArea.setFont(new Font("Malgun Gothic", Font.PLAIN, 15));
+		outputPane = form.addScrollPane(outputTextArea, 10, top, 760, 240);
 		
 		top = top + 250;
 		
-		JButton button = form.addButton(10, top, 100, 30, "Revise");
+		button = form.addButton(10, top, 100, 30, "Revise");
 		button.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -121,7 +134,7 @@ public class BBQueryHelper {
 			}
 		});
 		
-		JButton button2 = form.addButton(120, top, 100, 30, "Clear");
+		button2 = form.addButton(120, top, 100, 30, "Clear");
 		button2.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -156,5 +169,34 @@ public class BBQueryHelper {
 		form.setVisible(true);
 	}
 	
-	
+	private static void resizeForm(int formWidth, int formHeight) {
+		int textAreaHeight = formHeight - 130;
+		
+		int halfHeight = 0;
+		
+		int remain = textAreaHeight % 2;
+		if (remain == 1) {
+			textAreaHeight = textAreaHeight - 1;
+			halfHeight = textAreaHeight / 2;
+		} else {
+			halfHeight = textAreaHeight / 2;
+		}
+		
+		inputPane.setBounds(10, 10, formWidth - 40, halfHeight);
+		outputPane.setBounds(10, 10 + halfHeight + 10, formWidth - 40, halfHeight);
+		
+		int buttonWidth = formWidth - 50;
+		
+		int oneButtonWidth = 0;
+		int remain2 = oneButtonWidth % 2;
+		if (remain2 == 1) {
+			buttonWidth = buttonWidth - 1;
+			oneButtonWidth = buttonWidth / 2;
+		} else {
+			oneButtonWidth = buttonWidth / 2;
+		}
+		
+		button.setBounds(10, textAreaHeight + 30, oneButtonWidth, 30);
+		button2.setBounds(10 + oneButtonWidth + 10, textAreaHeight + 30, oneButtonWidth, 30);
+	}
 }
