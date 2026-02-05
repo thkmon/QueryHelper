@@ -3,7 +3,7 @@ package com.bb.queryhelper;
 public class CConst {
 	
 	// 프로그램 버전
-	public static String version = "20220615";
+	public static String version = "20260215";
 	
 	
 }
