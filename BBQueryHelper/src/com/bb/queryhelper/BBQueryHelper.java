@@ -170,7 +170,7 @@ public class BBQueryHelper {
 	}
 	
 	private static void resizeForm(int formWidth, int formHeight) {
-		int textAreaHeight = formHeight - 130;
+		int textAreaHeight = formHeight - 120;
 		
 		int halfHeight = 0;
 		

@@ -73,6 +73,7 @@ public class BasicForm extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(obj);
 		scrollPane.setBackground(Color.white);
 		scrollPane.setBounds(left, top, width, height);
+		JFrameDesignUtil.setColorToJScrollPane(scrollPane);
 		
 		addComponentObj(scrollPane);
 		return scrollPane;
