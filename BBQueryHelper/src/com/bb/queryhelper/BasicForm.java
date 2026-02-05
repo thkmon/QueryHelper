@@ -17,10 +17,10 @@ import javax.swing.JTextField;
 
 public class BasicForm extends JFrame {
 	
-	public static Color buttonColor = new Color(255, 255, 200);
+//	public static Color buttonColor = new Color(255, 255, 200);
 	public static Color buttonTextColor = new Color(0, 0, 0);
 	
-	public static Color formBackgroundColor = new Color(230, 230, 230);
+//	public static Color formBackgroundColor = new Color(230, 230, 230);
 	
 	private Container container = null;
 	private Font font = null;
@@ -32,11 +32,12 @@ public class BasicForm extends JFrame {
 		setSize(width, height);
 		setBounds(200, 200, width, height);
 		
-		setBackground(formBackgroundColor);
-		container.setBackground(formBackgroundColor);
+//		setBackground(formBackgroundColor);
+//		container.setBackground(formBackgroundColor);
 		
 		setTitle(title);		
-		font = new Font("굴림", 13, 13);
+		// font = new Font("굴림", 13, 13);
+		font = new Font("Malgun Gothic", Font.PLAIN, 13);
 		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -124,7 +125,7 @@ public class BasicForm extends JFrame {
 	
 	public JButton addButton(int left, int top, int width, int height, String value) {
 		JButton obj = new JButton();
-		obj.setBackground(buttonColor);
+//		obj.setBackground(buttonColor);
 		obj.setBounds(left, top, width, height);
 		obj.setText(value);
 		obj.setFont(font);
@@ -148,7 +149,7 @@ public class BasicForm extends JFrame {
 	
 	public JCheckBox addCheckBox(int left, int top, int width, int height, String value) {
 		JCheckBox checkBox = new JCheckBox();
-		checkBox.setBackground(formBackgroundColor);
+//		checkBox.setBackground(formBackgroundColor);
 		checkBox.setBounds(left, top, width, height);
 		checkBox.setText(value);
 		checkBox.setFont(font);
